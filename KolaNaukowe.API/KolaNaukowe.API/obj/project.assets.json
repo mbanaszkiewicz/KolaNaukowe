@@ -1792,6 +1792,19 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.Tools.DotNet/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "2.0.6",
+          "Newtonsoft.Json": "10.0.1"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/dotnet-ef.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/dotnet-ef.dll": {}
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/2.0.1": {
         "type": "package",
         "dependencies": {
@@ -6464,6 +6477,22 @@
         "tools/net461/ef.exe.config",
         "tools/net461/ef.x86.exe",
         "tools/net461/ef.x86.exe.config",
+        "tools/netcoreapp2.0/ef.dll",
+        "tools/netcoreapp2.0/ef.runtimeconfig.json"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.Tools.DotNet/2.0.2": {
+      "sha512": "jSGsxk5rPPpaiideKf95O4j+u1kJ/ieP+M9zPDyGJhFmTRXcCFhyVzzwVAUGOq1c7JgKOBHZYhCnfZJXdpuQUA==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.tools.dotnet/2.0.2",
+      "files": [
+        "lib/netcoreapp2.0/dotnet-ef.dll",
+        "lib/netcoreapp2.0/dotnet-ef.runtimeconfig.json",
+        "microsoft.entityframeworkcore.tools.dotnet.2.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.dotnet.nuspec",
+        "prefercliruntime",
+        "tools/net461/ef.exe",
+        "tools/net461/ef.x86.exe",
         "tools/netcoreapp2.0/ef.dll",
         "tools/netcoreapp2.0/ef.runtimeconfig.json"
       ]
@@ -13119,30 +13148,31 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.AspNetCore.All >= 2.0.6",
+      "Microsoft.EntityFrameworkCore.Tools.DotNet >= 2.0.2",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mateu\\.nuget\\packages\\": {},
+    "C:\\Users\\Bartek\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ProjectsC#\\KolaNaukowe\\KolaNaukowe\\KolaNaukowe.API\\KolaNaukowe.API\\KolaNaukowe.API.csproj",
+      "projectUniqueName": "C:\\Users\\Bartek\\Desktop\\PGS app\\KolaNaukowe\\KolaNaukowe.API\\KolaNaukowe.API\\KolaNaukowe.API.csproj",
       "projectName": "KolaNaukowe.API",
-      "projectPath": "D:\\ProjectsC#\\KolaNaukowe\\KolaNaukowe\\KolaNaukowe.API\\KolaNaukowe.API\\KolaNaukowe.API.csproj",
-      "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-      "outputPath": "D:\\ProjectsC#\\KolaNaukowe\\KolaNaukowe\\KolaNaukowe.API\\KolaNaukowe.API\\obj\\",
+      "projectPath": "C:\\Users\\Bartek\\Desktop\\PGS app\\KolaNaukowe\\KolaNaukowe.API\\KolaNaukowe.API\\KolaNaukowe.API.csproj",
+      "packagesPath": "C:\\Users\\Bartek\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bartek\\Desktop\\PGS app\\KolaNaukowe\\KolaNaukowe.API\\KolaNaukowe.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bartek\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
@@ -13171,6 +13201,10 @@
             "target": "Package",
             "version": "[2.0.6, )"
           },
+          "Microsoft.EntityFrameworkCore.Tools.DotNet": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "[2.0.0, )",
@@ -13188,5 +13222,16 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Detected package downgrade: Microsoft.NETCore.App from 2.0.6 to 2.0.0. Reference the package directly from the project to select a different version. \r\n KolaNaukowe.API -> Microsoft.EntityFrameworkCore.Tools.DotNet 2.0.2 -> Microsoft.NETCore.App (>= 2.0.6) \r\n KolaNaukowe.API -> Microsoft.NETCore.App (>= 2.0.0)",
+      "libraryId": "Microsoft.NETCore.App",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    }
+  ]
 }

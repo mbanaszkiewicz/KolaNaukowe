@@ -10,7 +10,7 @@ namespace KolaNaukowe.API.Services
     {
         IEnumerable<StudentResearchGroup> GetAll();
         StudentResearchGroup Get(int id);
-        void Add(StudentResearchGroup studentResearchGroup);
+        StudentResearchGroup Add(StudentResearchGroup studentResearchGroup);
         void Update(StudentResearchGroup studentResearchGroup);
         void Remove(int id);
     }

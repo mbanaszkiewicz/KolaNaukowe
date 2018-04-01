@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KolaNaukowe.API.Data;
 using KolaNaukowe.API.Models;
 
 namespace KolaNaukowe.API.Services
@@ -9,7 +10,14 @@ namespace KolaNaukowe.API.Services
     public class StudentResearchGroupData : IStudentResearchGroupData
     {
         List<StudentResearchGroup> _studentResearchGroups;
+        private KolaNaukoweDBContext _context;
 
+        public StudentResearchGroupData(KolaNaukoweDBContext context)
+        {
+            _context = context;
+        }
+
+        /*
         public StudentResearchGroupData()
         {
             _studentResearchGroups = new List<StudentResearchGroup>
@@ -18,27 +26,29 @@ namespace KolaNaukowe.API.Services
                 new StudentResearchGroup { Id = 2, Name = "Piast.NET"},
                 new StudentResearchGroup { Id = 3, Name = "Jakieś randomy"},
             };
-        }
+        }*/
 
-        public void Add(StudentResearchGroup studentResearchGroup)
+        public StudentResearchGroup Add(StudentResearchGroup studentResearchGroup)
         {
-            _studentResearchGroups.Add(studentResearchGroup);
+            _context.StudentResearchGroups.Add(studentResearchGroup);
+            _context.SaveChanges();
+            return studentResearchGroup;
         }
 
         public StudentResearchGroup Get(int id)
         {
-            return _studentResearchGroups.Single(x => x.Id == id);
+            return _context.StudentResearchGroups.Single(x => x.Id == id);
         }
 
         public IEnumerable<StudentResearchGroup> GetAll()
         {
-            return _studentResearchGroups.OrderBy(x => x.Name);
+            return _context.StudentResearchGroups.OrderBy(x => x.Name);
         }
 
         public void Remove(int id)
         {
             var studentResearchGroup = Get(id);
-            _studentResearchGroups.Remove(studentResearchGroup);
+            _context.StudentResearchGroups.Remove(studentResearchGroup);
         }
 
         public void Update(StudentResearchGroup studentResearchGroup)
