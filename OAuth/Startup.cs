@@ -18,7 +18,7 @@ namespace OAuth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer()
-                    .AddSigningCredential(new X509Certificate2 (@"C:\Users\Mikolaj\KolaNaukowe\KolaNaukowe\researchgroups.pfx"))
+                    .AddDeveloperSigningCredential()
                     .AddTestUsers(InMemoryConfiguration.Users().ToList())
                     .AddInMemoryClients(InMemoryConfiguration.Clients())
                     .AddInMemoryApiResources(InMemoryConfiguration.ApiResources());
