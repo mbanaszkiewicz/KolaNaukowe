@@ -19,11 +19,11 @@ namespace OAuth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer()
+                    .AddInMemoryIdentityResources(InMemoryConfiguration.GetIdentityResources())
                     .AddDeveloperSigningCredential()
                     .AddTestUsers(InMemoryConfiguration.Users().ToList())
                     .AddInMemoryClients(InMemoryConfiguration.Clients())
                     .AddInMemoryApiResources(InMemoryConfiguration.ApiResources());
-
             services.AddMvc();
   
         }
@@ -34,7 +34,6 @@ namespace OAuth
             app.UseDeveloperExceptionPage();
 
             app.UseIdentityServer();
-
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();

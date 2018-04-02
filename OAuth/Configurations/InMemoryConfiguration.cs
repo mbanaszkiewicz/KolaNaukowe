@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,14 @@ namespace OAuth.Configurations
 {
     public class InMemoryConfiguration
     {
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+            };
+        }
         public static IEnumerable<ApiResource> ApiResources()
         {
             return new[]
@@ -27,7 +36,22 @@ namespace OAuth.Configurations
                     ClientSecrets = new [] {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowedScopes = new[] {"researchgroups"}
+                },
+
+                new Client()
+                {
+                    ClientId = "rg",
+                    ClientName = "Client for RG project",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RedirectUris = { "http://localhost:50000/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:50000/signout-callback-oidc" },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 }
+
             };
         }
 
@@ -38,8 +62,8 @@ namespace OAuth.Configurations
                 new TestUser
                 {
                     SubjectId = "1",
-                    Username = "testuser@testmail.com",
-                    Password = "pass"
+                    Username = "testuser",
+                    Password = "password"
                 }
             };
         }

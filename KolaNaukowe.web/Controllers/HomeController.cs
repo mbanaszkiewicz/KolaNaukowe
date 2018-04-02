@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KolaNaukowe.web.Controllers
 {
@@ -31,13 +32,14 @@ namespace KolaNaukowe.web.Controllers
 
             return View(model);
         }
-
+        
         public IActionResult Index()
         {
                    
             return View();
         }
 
+        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

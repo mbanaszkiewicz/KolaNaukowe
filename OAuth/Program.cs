@@ -20,7 +20,7 @@ namespace OAuth
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:59418")
+                .UseUrls("http://localhost:40000")
                 .Build();
                 
     }
