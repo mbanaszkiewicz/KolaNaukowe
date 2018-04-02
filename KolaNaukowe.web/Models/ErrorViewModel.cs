@@ -1,6 +1,6 @@
 using System;
 
-namespace KolaNaukowe.Models
+namespace KolaNaukowe.web.Models
 {
     public class ErrorViewModel
     {
