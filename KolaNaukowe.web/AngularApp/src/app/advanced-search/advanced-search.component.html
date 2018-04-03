@@ -1,0 +1,115 @@
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-4">
+						<h2>Lista <b>Kół Naukowych</b></h2>
+					</div>
+					<div class="col-sm-8">						
+						<a href="#" class="btn btn-primary"><i class="material-icons">&#xE863;</i> <span>Odśwież listę</span></a>
+						<a href="#" class="btn btn-info"><i class="material-icons">&#xE24D;</i> <span>Wyeksportuj do excela</span></a>
+					</div>
+                </div>
+            </div>
+			<div class="table-filter">
+				<div class="row">
+                    <div class="col-sm-3">
+						<div class="show-entries">
+							<span>Pokaż</span>
+							<select class="form-control">
+								<option>5</option>
+								<option>10</option>
+								<option>15</option>
+								<option>20</option>
+							</select>
+							<span>kół</span>
+						</div>
+					</div>
+                    <div class="col-sm-9">
+						<button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+						<div class="filter-group">
+							<label>Nazwa</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="filter-group">
+							<label>Wydział</label>
+							<select class="form-control">
+								<option>Wszystkie</option>
+								<option>Wydział Matematyki</option>
+								<option>Wydział Chemiczny</option>							
+							</select>
+						</div>
+						
+						<span class="filter-icon"><i class="fa fa-filter"></i>  Filtrowanie</span>
+                   </div>
+                </div>
+			</div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nazwa Koła</th>
+						<th>Wydział</th>
+						<th>Data założenia</th>						
+                        <th>Opiekun</th>						
+						<th>Prezes</th>
+						<th>Więcej</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Logo"> Koło1</a></td>
+						<td>Chemiczny</td>
+                        <td>Jun 15, 2017</td>                        
+						<td> Ktoś</td>
+						<td>Jarosław Boberek</td>
+						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+                    </tr>
+					<tr>
+                        <td>2</td>
+                        <td><a href="#"><img src="/examples/images/avatar/2.jpg" class="avatar" alt="Logo"> Paula Wilson</a></td>
+                        <td>Mechaniczny</td>                       
+						<td>Jun 21, 2017</td>
+						<td>Ktoś</td>
+						<td>Ktoś</td>
+						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
+                    </tr>
+					<tr>
+                        
+                </tbody>
+            </table>
+			<div class="clearfix">
+                <div class="hint-text">Pokazuje <b>2</b> z <b>2</b> kół</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Poprzednia</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+					<li class="page-item"><a href="#" class="page-link">6</a></li>
+					<li class="page-item"><a href="#" class="page-link">7</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Następna</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>     
+
+      
+</body>
+</html>
