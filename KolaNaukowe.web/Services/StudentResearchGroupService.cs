@@ -41,9 +41,11 @@ namespace KolaNaukowe.web.Services
         }
 
        
-        public void Update(StudentResearchGroup studentResearchGroup)
+        public void Update(int id)
         {
-            throw new NotImplementedException();
+            var studentResearchGroupToUpdate = _context.StudentResearchGroups.SingleOrDefault(x => x.Id == id);
+            studentResearchGroupToUpdate.Name = "new name";
+            _context.SaveChanges();
         }
 
       
