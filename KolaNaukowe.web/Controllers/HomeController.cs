@@ -21,22 +21,39 @@ namespace KolaNaukowe.web.Controllers
 
         public IActionResult PrintAll()
         {
-            var group = new StudentResearchGroup()
-            {
-                Name = "EKA.NET",
-                CreatedAt = DateTime.UtcNow,
-            };
-
-            _service.Add(group);
+           
             var model = _service.GetAll();
 
             return View(model);
         }
-        
+
+        //testowe dane
+        public IActionResult AddGroup()
+        {
+
+            var group = new StudentResearchGroup()
+            {
+                Name = "EKADOTNET",
+                CreatedAt = DateTime.UtcNow,
+            };
+
+            _service.Add(group);
+            return Ok();
+
+        }
+
+        //testowe dane
+        public IActionResult UpdateGroup()
+        {
+
+            _service.Update("EKA.NET");
+            return Ok();
+        }
+
         public IActionResult Index()
         {
-                   
-            return View();
+            var model = _service.GetAll();
+            return View(model);
         }
 
         [Authorize]

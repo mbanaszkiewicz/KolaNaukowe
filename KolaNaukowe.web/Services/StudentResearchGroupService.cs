@@ -14,6 +14,7 @@ namespace KolaNaukowe.web.Services
         public StudentResearchGroupService(KolaNaukoweDbContext context)
         {
             _context = context;
+            DbInitializer.Initialize(_context);
         }
 
         public StudentResearchGroup Add(StudentResearchGroup studentResearchGroup)
@@ -40,10 +41,12 @@ namespace KolaNaukowe.web.Services
             _context.StudentResearchGroups.Remove(studentResearchGroup);
         }
 
-       
-        public void Update(int id)
+       //testowe dane
+        public void Update(string name)
         {
-            var studentResearchGroupToUpdate = _context.StudentResearchGroups.SingleOrDefault(x => x.Id == id);
+            var studentResearchGroupToUpdate = _context.StudentResearchGroups.FirstOrDefault(x => x.Name == name);
+            if (studentResearchGroupToUpdate == null)
+                return;
             studentResearchGroupToUpdate.Name = "new name";
             _context.SaveChanges();
         }
