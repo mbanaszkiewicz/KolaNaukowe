@@ -1,5 +1,6 @@
 ﻿using KolaNaukowe.web.Data;
 using KolaNaukowe.web.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,17 +38,15 @@ namespace KolaNaukowe.web.Services
 
         public void Remove(int id)
         {
-            var studentResearchGroup = Get(id);
-            _context.StudentResearchGroups.Remove(studentResearchGroup);
+            StudentResearchGroup studentGroup = _context.StudentResearchGroups.Find(id);
+            _context.StudentResearchGroups.Remove(studentGroup);
+            _context.SaveChanges();
         }
 
        //testowe dane
-        public void Update(string name)
+        public void Update(StudentResearchGroup studentGroup)
         {
-            var studentResearchGroupToUpdate = _context.StudentResearchGroups.FirstOrDefault(x => x.Name == name);
-            if (studentResearchGroupToUpdate == null)
-                return;
-            studentResearchGroupToUpdate.Name = "new name";
+            _context.Entry(studentGroup).State = EntityState.Modified;
             _context.SaveChanges();
         }
 

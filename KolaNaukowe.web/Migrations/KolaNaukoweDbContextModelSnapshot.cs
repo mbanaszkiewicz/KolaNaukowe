@@ -43,6 +43,8 @@ namespace KolaNaukowe.web.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
+                    b.Property<string>("Department");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");

@@ -11,8 +11,8 @@ using System;
 namespace KolaNaukowe.web.Migrations
 {
     [DbContext(typeof(KolaNaukoweDbContext))]
-    [Migration("20180405104857_Initial")]
-    partial class Initial
+    [Migration("20180407193813_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,8 @@ namespace KolaNaukowe.web.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Department");
 
                     b.Property<string>("Name");
 
