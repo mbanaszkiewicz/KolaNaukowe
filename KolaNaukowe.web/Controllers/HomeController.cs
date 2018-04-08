@@ -56,7 +56,6 @@ namespace KolaNaukowe.web.Controllers
             return View(model);
         }
 
-        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

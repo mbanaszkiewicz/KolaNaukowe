@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KolaNaukowe.web.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
+using KolaNaukowe.web.Data;
+using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Services;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace KolaNaukowe.web
 {
@@ -26,27 +27,15 @@ namespace KolaNaukowe.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
-            services.AddMvc();
             services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
-            //Authentication config
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = "Cookies";
-                options.DefaultChallengeScheme = "oidc";
-            })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("oidc", options =>
-                {
-                    options.SignInScheme = "Cookies";
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<KolaNaukoweDbContext>()
+                .AddDefaultTokenProviders();
 
-                    options.Authority = "http://localhost:40000";
-                    options.RequireHttpsMetadata = false;
+            services.AddTransient<IEmailSender, EmailSender>();
 
-                    options.ClientId = "rg";
-                    options.SaveTokens = true;
-                });
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +45,7 @@ namespace KolaNaukowe.web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
             else
             {
