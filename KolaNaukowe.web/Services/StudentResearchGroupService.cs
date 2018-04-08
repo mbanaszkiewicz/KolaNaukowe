@@ -15,7 +15,7 @@ namespace KolaNaukowe.web.Services
         public StudentResearchGroupService(KolaNaukoweDbContext context)
         {
             _context = context;
-            DbInitializer.Initialize(_context);
+            //DbInitializer.Initialize(_context);
         }
 
         public StudentResearchGroup Add(StudentResearchGroup studentResearchGroup)

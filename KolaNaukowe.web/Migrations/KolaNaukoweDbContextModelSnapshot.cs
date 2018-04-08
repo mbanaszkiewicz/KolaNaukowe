@@ -45,7 +45,8 @@ namespace KolaNaukowe.web.Migrations
 
                     b.Property<string>("Department");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 

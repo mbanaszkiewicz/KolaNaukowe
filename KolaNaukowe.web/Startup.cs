@@ -26,8 +26,8 @@ namespace KolaNaukowe.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
-            services.AddMvc();
-            services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+            services.AddMvc(); 
+            services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=tcp:pgsproject.database.windows.net,1433;Initial Catalog=KolaNaukoweDB;Integrated Security=False;User Id=Projectuser@pgsproject;Password=Haslodobazydanych1;Encrypt=True;TrustServerCertificate=False;MultipleActiveResultSets=True"));
             //Authentication config
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
