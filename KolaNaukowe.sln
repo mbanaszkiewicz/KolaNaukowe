@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuth", "OAuth\OAuth.csproj", "{541F1507-E729-4563-9F1E-2F0A5B0D5ADC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KolaNaukowe.web", "KolaNaukowe.web\KolaNaukowe.web.csproj", "{657AB955-D486-4CFD-B81E-BBD2838F38CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KolaNaukowe.web", "KolaNaukowe.web\KolaNaukowe.web.csproj", "{657AB955-D486-4CFD-B81E-BBD2838F38CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{541F1507-E729-4563-9F1E-2F0A5B0D5ADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{541F1507-E729-4563-9F1E-2F0A5B0D5ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{541F1507-E729-4563-9F1E-2F0A5B0D5ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{541F1507-E729-4563-9F1E-2F0A5B0D5ADC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{657AB955-D486-4CFD-B81E-BBD2838F38CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{657AB955-D486-4CFD-B81E-BBD2838F38CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{657AB955-D486-4CFD-B81E-BBD2838F38CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
