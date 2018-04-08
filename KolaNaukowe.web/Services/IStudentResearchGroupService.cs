@@ -11,7 +11,7 @@ namespace KolaNaukowe.web
         IEnumerable<StudentResearchGroup> GetAll();
         StudentResearchGroup Get(int id);
         StudentResearchGroup Add(StudentResearchGroup studentResearchGroup);
-        void Update(string name);
+        void Update(StudentResearchGroup studentGroup);
         void Remove(int id);
     }
 }

@@ -20,10 +20,10 @@ namespace KolaNaukowe.web.Data
 
             var students = new StudentResearchGroup[]
             {
-            new StudentResearchGroup{Name="EKA.NET",CreatedAt=DateTime.UtcNow},
-            new StudentResearchGroup{Name="PIAST.NET",CreatedAt=DateTime.UtcNow},
-            new StudentResearchGroup{Name="NEW.NET",CreatedAt=DateTime.UtcNow},
-            new StudentResearchGroup{Name="EKA.NET",CreatedAt=DateTime.UtcNow},
+            new StudentResearchGroup{Name="EKA.NET",CreatedAt=DateTime.UtcNow,Department = "Elektroniki"},
+            new StudentResearchGroup{Name="PIAST.NET",CreatedAt=DateTime.UtcNow,Department = "Informatyki i Zarzadzania"},
+            new StudentResearchGroup{Name="NEW.NET",CreatedAt=DateTime.UtcNow, Department = "Mechaniczny"},
+            new StudentResearchGroup{Name="COS.NET",CreatedAt=DateTime.UtcNow, Department = "Elektryczny"},
             };
 
             foreach (StudentResearchGroup s in students)
