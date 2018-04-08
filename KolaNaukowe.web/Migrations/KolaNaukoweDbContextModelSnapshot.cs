@@ -99,6 +99,8 @@ namespace KolaNaukowe.web.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
+                    b.Property<string>("OwnedId");
+
                     b.HasKey("Id");
 
                     b.ToTable("StudentResearchGroups");

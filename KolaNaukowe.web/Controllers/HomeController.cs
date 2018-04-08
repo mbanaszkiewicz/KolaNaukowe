@@ -19,7 +19,7 @@ namespace KolaNaukowe.web.Controllers
         {
             _service = service;
         }   
-      
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = _service.GetAll();
@@ -91,19 +91,19 @@ namespace KolaNaukowe.web.Controllers
             return View(studentGroup);
         }
 
-
+        [AllowAnonymous]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
             return View();
         }
-        [Authorize]
+        [AllowAnonymous]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

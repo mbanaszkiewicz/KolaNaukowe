@@ -11,17 +11,22 @@ using Microsoft.Extensions.DependencyInjection;
 using KolaNaukowe.web.Data;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace KolaNaukowe.web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            Enviroment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment Enviroment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -35,7 +40,22 @@ namespace KolaNaukowe.web
 
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc();
+            //var skipHTPPS = Configuration.GetValue<bool>("LocalTest:skipHTTPS");
+            //services.Configure<MvcOptions>(options =>
+            //{
+            //    if (Enviroment.IsDevelopment() && !skipHTPPS)
+            //    {
+            //        options.Filters.Add(new RequireHttpsAttribute());
+            //    }
+            //});
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                .RequireAuthenticatedUser()
+                                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

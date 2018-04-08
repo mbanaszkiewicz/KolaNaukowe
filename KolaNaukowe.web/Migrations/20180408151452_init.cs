@@ -56,7 +56,8 @@ namespace KolaNaukowe.web.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     Department = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    OwnedId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
