@@ -47,7 +47,7 @@ namespace KolaNaukowe.web.Controllers
 
             return View(student);
         }
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Create()
         {    
             return View();
@@ -75,12 +75,12 @@ namespace KolaNaukowe.web.Controllers
             }
             return View(studentGroup);
         }
-        [Authorize]
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Delete()
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Policy = "LeaderAndAdmin")]
         public IActionResult Edit()
         {
             return View();
@@ -98,7 +98,7 @@ namespace KolaNaukowe.web.Controllers
             return View(studentGroup);
         }
 
-        [Authorize(AuthenticationSchemes = "Bearer", Policy = "AdminOnly")]
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -106,13 +106,8 @@ namespace KolaNaukowe.web.Controllers
         }
         public IActionResult Contact()
         {
-            string msg = "nie";
-            if (User.IsInRole("Administrator"))
-            {
-                 msg = "tak";
-            }
-            
-            ViewData["Message"] = msg;
+      
+            ViewData["Message"] = "Contact";
             return View();
         }
         

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace KolaNaukowe.web
 {
@@ -47,23 +48,25 @@ namespace KolaNaukowe.web
                 .AddInMemoryApiResources(Config.Apis)
                 .AddAspNetIdentity<ApplicationUser>();
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication()
-                .AddJwtBearer(jwt =>
-                {
-                    jwt.Authority = "http://localhost:50000";
-                    jwt.RequireHttpsMetadata = false;
-                    jwt.Audience = "api";
-                });
+                  .AddJwtBearer(jwt =>
+                  {
+                      jwt.Authority = "http://localhost:5000";
+                      jwt.RequireHttpsMetadata = false;
+                      jwt.Audience = "api1";
+                  });
+
 
             services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminOnly", policy =>
-                policy.Requirements.Add(new RoleRequirement(new List<string> {"Administrator"})));
+                {
+                    options.AddPolicy("AdminOnly", policy =>
+                    policy.Requirements.Add(new RoleRequirement(new List<string> { "Administrator" })));
 
-                options.AddPolicy("LeaderAndAdmin", policy =>
-                policy.Requirements.Add(new RoleRequirement(new List<string> { "Administrator", "Leader" })));
-            });
+                    options.AddPolicy("LeaderAndAdmin", policy =>
+                    policy.Requirements.Add(new RoleRequirement(new List<string> { "Administrator", "Leader" })));
+                });
 
             services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
 

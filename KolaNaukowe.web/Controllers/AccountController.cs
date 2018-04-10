@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Models.AccountViewModels;
 using KolaNaukowe.web.Services;
+using KolaNaukowe.web.Authorization;
 
 namespace KolaNaukowe.web.Controllers
 {
@@ -222,6 +223,7 @@ namespace KolaNaukowe.web.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
+                await _userManager.AddToRoleAsync(user, Constants.UserRole);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

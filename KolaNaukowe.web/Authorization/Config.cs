@@ -14,19 +14,17 @@ namespace KolaNaukowe.web.Authorization
            {
                ClientId = "rg",
                ClientName = "StudentResearchGroupsClient",
-               AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+               AllowedGrantTypes = GrantTypes.ClientCredentials,
                AllowAccessTokensViaBrowser = true,
                RequireConsent = false,
-               ClientSecrets =
-               {
-                   new Secret("secret".Sha256())
-               },
-               RedirectUris =
-               {
-                   "http://localhost:50000/signin-oidc"
-               },
-               PostLogoutRedirectUris = {"http://localhost:50000/signout-callback-oidc.html"},
+              RedirectUris = {
+                    "http://localhost:50000/callback.html",
+                    "http://localhost:50000/popup.html",
+                    "http://localhost:50000/silent.html"
+                },
+                PostLogoutRedirectUris = { "http://localhost:50000/index.html" },
                AllowedScopes = {"openid", "profile", "email", "api"},
+               AllowOfflineAccess = true,
             },
         };
 
