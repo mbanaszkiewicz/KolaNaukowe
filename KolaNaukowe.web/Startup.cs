@@ -11,9 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using KolaNaukowe.web.Data;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Services;
+using KolaNaukowe.web.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace KolaNaukowe.web
 {
@@ -31,6 +33,9 @@ namespace KolaNaukowe.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IAuthorizationHandler, ResearchGroupLeaderAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, ResearchGroupAdminAuthorizationHandler>();
+
             services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
             services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 

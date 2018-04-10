@@ -11,8 +11,8 @@ using System;
 namespace KolaNaukowe.web.Migrations
 {
     [DbContext(typeof(KolaNaukoweDbContext))]
-    [Migration("20180408151452_init")]
-    partial class init
+    [Migration("20180408180126_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,7 +100,7 @@ namespace KolaNaukowe.web.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
-                    b.Property<string>("OwnedId");
+                    b.Property<string>("OwnerId");
 
                     b.HasKey("Id");
 

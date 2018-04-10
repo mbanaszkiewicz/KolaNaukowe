@@ -1,5 +1,7 @@
 ﻿using KolaNaukowe.web.Data;
 using KolaNaukowe.web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,11 +13,12 @@ namespace KolaNaukowe.web.Services
     public class StudentResearchGroupService : IStudentResearchGroupService
     {
         private KolaNaukoweDbContext _context;
-
-        public StudentResearchGroupService(KolaNaukoweDbContext context)
+ 
+        public StudentResearchGroupService(KolaNaukoweDbContext context, IAuthorizationService authorizationService, UserManager<ApplicationUser> userManager)
         {
             _context = context;
-            DbInitializer.Initialize(_context);
+
+            //przenioslem DBInitializer do Program.cs 
         }
 
         public StudentResearchGroup Add(StudentResearchGroup studentResearchGroup)

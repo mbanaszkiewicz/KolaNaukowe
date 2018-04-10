@@ -8,25 +8,31 @@ using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using KolaNaukowe.web.Authorization;
 
 namespace KolaNaukowe.web.Controllers
 {
     public class HomeController : Controller
     {
         private IStudentResearchGroupService _service;
+        private IAuthorizationService _authorizationService { get; }
+        private UserManager<ApplicationUser> _userManager { get; }
+        private KolaNaukoweDbContext _context;
 
-        public HomeController(IStudentResearchGroupService service)
+        public HomeController(IStudentResearchGroupService service, IAuthorizationService authorizationService, UserManager<ApplicationUser> userManager, KolaNaukoweDbContext context)
         {
+            _context = context;
             _service = service;
-        }   
+            _authorizationService = authorizationService;
+            _userManager = userManager;
+        }
         [AllowAnonymous]
         public IActionResult Index()
         {
             var model = _service.GetAll();
             return View(model);
         }
-
-
 
         public IActionResult Details(int id)
         {
@@ -56,10 +62,10 @@ namespace KolaNaukowe.web.Controllers
         {         
                 if (ModelState.IsValid)
                 {
-                    _service.Add(studentGroup);
+                _service.Add(studentGroup);
                     return RedirectToAction(nameof(Index));
                 }
-            return View(studentGroup); 
+            return   View(studentGroup); 
         }
 
         [HttpPost]
@@ -87,7 +93,11 @@ namespace KolaNaukowe.web.Controllers
         [HttpPost]
         public IActionResult Edit(int id, StudentResearchGroup studentGroup)
         {
-            _service.Update(studentGroup);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             return View(studentGroup);
         }
 

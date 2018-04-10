@@ -99,7 +99,7 @@ namespace KolaNaukowe.web.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
-                    b.Property<string>("OwnedId");
+                    b.Property<string>("OwnerId");
 
                     b.HasKey("Id");
 

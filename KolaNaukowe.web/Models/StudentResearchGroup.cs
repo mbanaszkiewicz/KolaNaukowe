@@ -19,7 +19,7 @@ namespace KolaNaukowe.web.Models
         public IEnumerable<Student> Students { get; set; }
 
         // user ID from AspNetUser table.
-        public string OwnedId { get; set; }
+        public string OwnerId { get; set; }
 
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace KolaNaukowe.web.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +57,7 @@ namespace KolaNaukowe.web.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     Department = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
-                    OwnedId = table.Column<string>(nullable: true)
+                    OwnerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
