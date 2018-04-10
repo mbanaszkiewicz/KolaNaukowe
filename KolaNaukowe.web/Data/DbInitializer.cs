@@ -19,7 +19,7 @@ namespace KolaNaukowe.web.Data
                 context.Database.EnsureCreated();
                 //konto admina(wszystkie akcje dozwolone)
                 var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@test.com");
-                await EnsureRole(serviceProvider, adminID, Constants.LeaderRole);
+                await EnsureRole(serviceProvider, adminID, Constants.AdministratorRole);
                 //konto prezesa(edycja dozwolona)(obecnie jeden dla wszystkich kół)
                 var leaderID = await EnsureUser(serviceProvider, testUserPw, "leader@test.com");
                 await EnsureRole(serviceProvider, leaderID, Constants.LeaderRole);

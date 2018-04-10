@@ -16,18 +16,15 @@ namespace KolaNaukowe.web.Controllers
     public class HomeController : Controller
     {
         private IStudentResearchGroupService _service;
-        private IAuthorizationService _authorizationService { get; }
-        private UserManager<ApplicationUser> _userManager { get; }
         private KolaNaukoweDbContext _context;
 
-        public HomeController(IStudentResearchGroupService service, IAuthorizationService authorizationService, UserManager<ApplicationUser> userManager, KolaNaukoweDbContext context)
+        public HomeController(IStudentResearchGroupService service, KolaNaukoweDbContext context)
         {
             _context = context;
             _service = service;
-            _authorizationService = authorizationService;
-            _userManager = userManager;
+
         }
-        [AllowAnonymous]
+        
         public IActionResult Index()
         {
             var model = _service.GetAll();
@@ -50,7 +47,7 @@ namespace KolaNaukowe.web.Controllers
 
             return View(student);
         }
-
+        [Authorize]
         public IActionResult Create()
         {    
             return View();
@@ -78,12 +75,12 @@ namespace KolaNaukowe.web.Controllers
             }
             return View(studentGroup);
         }
-
+        [Authorize]
         public IActionResult Delete()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Edit()
         {
             return View();
@@ -101,19 +98,24 @@ namespace KolaNaukowe.web.Controllers
             return View(studentGroup);
         }
 
-        [AllowAnonymous]
+        [Authorize(AuthenticationSchemes = "Bearer", Policy = "AdminOnly")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
             return View();
         }
-        [AllowAnonymous]
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            string msg = "nie";
+            if (User.IsInRole("Administrator"))
+            {
+                 msg = "tak";
+            }
+            
+            ViewData["Message"] = msg;
             return View();
         }
-        [AllowAnonymous]
+        
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

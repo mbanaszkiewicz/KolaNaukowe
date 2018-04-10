@@ -21,46 +21,57 @@ namespace KolaNaukowe.web
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        public IHostingEnvironment Enviroment { get; }
+
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
             Enviroment = env;
         }
 
-        public IConfiguration Configuration { get; }
-        public IHostingEnvironment Enviroment { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IAuthorizationHandler, ResearchGroupLeaderAuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, ResearchGroupAdminAuthorizationHandler>();
-
-            services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
-            services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+            services.AddMvc();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<KolaNaukoweDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                .AddInMemoryPersistedGrants()
+                .AddInMemoryIdentityResources(Config.identityResources)
+                .AddInMemoryClients(Config.Clients)
+                .AddInMemoryApiResources(Config.Apis)
+                .AddAspNetIdentity<ApplicationUser>();
+
+
+            services.AddAuthentication()
+                .AddJwtBearer(jwt =>
+                {
+                    jwt.Authority = "http://localhost:50000";
+                    jwt.RequireHttpsMetadata = false;
+                    jwt.Audience = "api";
+                });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy =>
+                policy.Requirements.Add(new RoleRequirement(new List<string> {"Administrator"})));
+
+                options.AddPolicy("LeaderAndAdmin", policy =>
+                policy.Requirements.Add(new RoleRequirement(new List<string> { "Administrator", "Leader" })));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
+
+            services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
+            services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+
             services.AddTransient<IEmailSender, EmailSender>();
 
-            //var skipHTPPS = Configuration.GetValue<bool>("LocalTest:skipHTTPS");
-            //services.Configure<MvcOptions>(options =>
-            //{
-            //    if (Enviroment.IsDevelopment() && !skipHTPPS)
-            //    {
-            //        options.Filters.Add(new RequireHttpsAttribute());
-            //    }
-            //});
-
-            services.AddMvc(config =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                                .RequireAuthenticatedUser()
-                                .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +90,7 @@ namespace KolaNaukowe.web
 
             app.UseStaticFiles();
 
-            app.UseAuthentication();
+            app.UseIdentityServer();
 
             app.UseMvc(routes =>
             {
