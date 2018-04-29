@@ -1,6 +1,9 @@
-﻿using KolaNaukowe.web.Models;
+﻿using AutoMapper;
+using KolaNaukowe.web.Dtos;
+using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KolaNaukowe.web.Services
 {
@@ -8,26 +11,32 @@ namespace KolaNaukowe.web.Services
     {
 
         private readonly IGenericRepository<StudentResearchGroup> _genericRepository;
+        private readonly IMapper _mapper;
 
-        public StudentResearchGroupService(IGenericRepository<StudentResearchGroup> genericRepository)
+
+        public StudentResearchGroupService(IGenericRepository<StudentResearchGroup> genericRepository, IMapper mapper)
         {
             _genericRepository = genericRepository;
+            _mapper = mapper;
         }
 
-        public StudentResearchGroup Add(StudentResearchGroup student)
+        public StudentResearchGroupDto Add(StudentResearchGroup newStudentResearchGroup)
         {
-            return _genericRepository.Add(student);
+            var studentResearchGroup = _genericRepository.Add(newStudentResearchGroup);
+            return _mapper.Map<StudentResearchGroup, StudentResearchGroupDto>(studentResearchGroup);
         }
 
        
-        public StudentResearchGroup Get(int id)
+        public StudentResearchGroupDto Get(int id)
         {
-            return _genericRepository.Get(id);
+            var studentResearchGroup = _genericRepository.Get(id);
+            return _mapper.Map<StudentResearchGroup, StudentResearchGroupDto>(studentResearchGroup);
         }
 
-        public IEnumerable<StudentResearchGroup> GetAll()
+        public IEnumerable<StudentResearchGroupDto> GetAll()
         {
-            return _genericRepository.GetAll();
+            var studentResearchGroups = _genericRepository.GetAll().OrderBy(c => c.Name);                   
+            return _mapper.Map<IEnumerable<StudentResearchGroup>, IEnumerable<StudentResearchGroupDto>>(studentResearchGroups);                      
         }
 
         public void Remove(int id)

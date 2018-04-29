@@ -16,7 +16,6 @@ namespace KolaNaukowe.web.Controllers
         {
             _context = context;
             _studentResearchGroupService = studentResearchGroupService;
-
         }
         
         public IActionResult Index()
@@ -49,26 +48,29 @@ namespace KolaNaukowe.web.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(StudentResearchGroup studentGroup)
-        {         
-                if (ModelState.IsValid)
+        public IActionResult Create(StudentResearchGroup newStudentResearchGroup)
+        {
+            if (!ModelState.IsValid)
                 {
-                _studentResearchGroupService.Add(studentGroup);
                     return RedirectToAction(nameof(Index));
                 }
-            return   View(studentGroup); 
+            var studentResearchGroup = _studentResearchGroupService.Add(newStudentResearchGroup);
+            return View(studentResearchGroup); 
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, StudentResearchGroup studentGroup)
+        public IActionResult Delete(int id, StudentResearchGroup newStudentResearchGroup)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _studentResearchGroupService.Remove(id);
                 return RedirectToAction(nameof(Index));
             }
-            return View(studentGroup);
+            _studentResearchGroupService.Remove(id);
+
+            var studentResearchGroup = _studentResearchGroupService.Get(id);
+            return View(studentResearchGroup);
         }
+
         [Authorize(Policy = "AdminOnly")]
         public IActionResult Delete()
         {
@@ -88,8 +90,9 @@ namespace KolaNaukowe.web.Controllers
             {
                 return View();
             }
-
-            return View(studentGroup);
+            _studentResearchGroupService.Update(studentGroup);
+            var studentResearchGroup = _studentResearchGroupService.Get(id);
+            return View(studentResearchGroup);
         }
 
         [Authorize(Policy = "AdminOnly")]

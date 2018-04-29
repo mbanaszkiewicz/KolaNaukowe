@@ -73,7 +73,7 @@ namespace KolaNaukowe.web.Data
                 return;   // DB has been seeded
             }
 
-            var students = new StudentResearchGroup[]
+            var studentGroups = new StudentResearchGroup[]
             {
             new StudentResearchGroup{Name="EKA.NET",CreatedAt=DateTime.UtcNow,Department = "Elektroniki", OwnerId = leaderID},
             new StudentResearchGroup{Name="PIAST.NET",CreatedAt=DateTime.UtcNow,Department = "Informatyki i Zarzadzania", OwnerId = leaderID},
@@ -81,7 +81,7 @@ namespace KolaNaukowe.web.Data
             new StudentResearchGroup{Name="COS.NET",CreatedAt=DateTime.UtcNow, Department = "Elektryczny", OwnerId = leaderID},
             };
 
-            foreach (StudentResearchGroup s in students)
+            foreach (StudentResearchGroup s in studentGroups)
             {
                 context.StudentResearchGroups.Add(s);
             }

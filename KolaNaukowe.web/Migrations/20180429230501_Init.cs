@@ -176,6 +176,8 @@ namespace KolaNaukowe.web.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     StudentResearchGroupId = table.Column<int>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },

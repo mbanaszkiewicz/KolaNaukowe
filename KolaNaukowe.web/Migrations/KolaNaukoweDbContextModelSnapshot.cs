@@ -76,6 +76,10 @@ namespace KolaNaukowe.web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Name");
+
                     b.Property<int?>("StudentResearchGroupId");
 
                     b.Property<int>("UserId");

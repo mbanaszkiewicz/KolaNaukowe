@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IdentityModel.Tokens.Jwt;
 using KolaNaukowe.web.Repositories;
+using KolaNaukowe.web.Mappers;
 
 namespace KolaNaukowe.web
 {
@@ -35,7 +36,6 @@ namespace KolaNaukowe.web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<KolaNaukoweDbContext>()
@@ -70,11 +70,12 @@ namespace KolaNaukowe.web
                 });
 
             services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
-
             services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
             services.AddScoped<IGenericRepository<StudentResearchGroup>, GenericRepository<StudentResearchGroup>>();
             services.AddScoped<IGenericRepository<Student>, GenericRepository<Student>>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddSingleton(AutoMapperConfig.Initialize());
+            services.AddMvc();
 
             services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 

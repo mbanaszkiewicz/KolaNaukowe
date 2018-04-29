@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
+using KolaNaukowe.web.Dtos;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Repositories;
 
@@ -7,25 +10,30 @@ namespace KolaNaukowe.web.Services
     public class StudentService : IStudentService
     {
         private readonly IGenericRepository<Student> _genericRepository;
+        private readonly IMapper _mapper;
 
-        public StudentService(IGenericRepository<Student> genericRepository)
+        public StudentService(IGenericRepository<Student> genericRepository, IMapper mapper)
         {
             _genericRepository = genericRepository;
+            _mapper = mapper;
         }
 
-        public Student Add(Student student)
+        public StudentDto Add(Student newStudent)
         {
-            return _genericRepository.Add(student);
+            var student = _genericRepository.Add(newStudent);
+            return _mapper.Map<Student, StudentDto>(student);          
         }
 
-        public Student Get(int id)
+        public StudentDto Get(int id)
         {
-            return _genericRepository.Get(id);
+            var student = _genericRepository.Get(id);
+            return _mapper.Map<Student, StudentDto>(student);
         }
 
-        public IEnumerable<Student> GetAll()
+        public IEnumerable<StudentDto> GetAll()
         {
-            return _genericRepository.GetAll();
+            var students = _genericRepository.GetAll().OrderBy(c => c.Name);
+            return _mapper.Map<IEnumerable<Student>, IEnumerable<StudentDto>>(students);
         }
 
         public void Remove(int id)
