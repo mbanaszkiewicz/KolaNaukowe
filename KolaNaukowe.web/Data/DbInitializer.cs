@@ -73,15 +73,40 @@ namespace KolaNaukowe.web.Data
                 return;   // DB has been seeded
             }
 
-            var students = new StudentResearchGroup[]
+            //testowe dane
+            var students = new Student[]
             {
-            new StudentResearchGroup{Name="EKA.NET",CreatedAt=DateTime.UtcNow,Department = "Elektroniki", OwnerId = leaderID},
-            new StudentResearchGroup{Name="PIAST.NET",CreatedAt=DateTime.UtcNow,Department = "Informatyki i Zarzadzania", OwnerId = leaderID},
+            new Student{Name="Maciek" },
+            new Student{Name="Antek" },
+            };
+
+            var students2 = new Student[]
+           {
+            new Student{Name="Kamil" },
+            new Student{Name="Marta" },
+           };
+
+            foreach (Student s in students)
+            {
+                context.Students.Add(s);
+            }
+            context.SaveChanges();
+
+            foreach (Student s in students2)
+            {
+                context.Students.Add(s);
+            }
+            context.SaveChanges();
+
+            var studentGroups = new StudentResearchGroup[]
+            {
+            new StudentResearchGroup{Name="EKA.NET",CreatedAt=DateTime.UtcNow,Department = "Elektroniki", OwnerId = leaderID, Students = students},
+            new StudentResearchGroup{Name="PIAST.NET",CreatedAt=DateTime.UtcNow,Department = "Informatyki i Zarzadzania", OwnerId = leaderID, Students = students2},
             new StudentResearchGroup{Name="NEW.NET",CreatedAt=DateTime.UtcNow, Department = "Mechaniczny",OwnerId = leaderID},
             new StudentResearchGroup{Name="COS.NET",CreatedAt=DateTime.UtcNow, Department = "Elektryczny", OwnerId = leaderID},
             };
 
-            foreach (StudentResearchGroup s in students)
+            foreach (StudentResearchGroup s in studentGroups)
             {
                 context.StudentResearchGroups.Add(s);
             }

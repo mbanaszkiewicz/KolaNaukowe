@@ -11,7 +11,7 @@ using System;
 namespace KolaNaukowe.web.Migrations
 {
     [DbContext(typeof(KolaNaukoweDbContext))]
-    [Migration("20180418141745_Init")]
+    [Migration("20180429202504_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,9 +77,10 @@ namespace KolaNaukowe.web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("StudentResearchGroupId");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("StudentResearchGroupId");
 
                     b.HasKey("Id");
 
@@ -219,7 +220,8 @@ namespace KolaNaukowe.web.Migrations
                 {
                     b.HasOne("KolaNaukowe.web.Models.StudentResearchGroup", "StudentResearchGroup")
                         .WithMany("Students")
-                        .HasForeignKey("StudentResearchGroupId");
+                        .HasForeignKey("StudentResearchGroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

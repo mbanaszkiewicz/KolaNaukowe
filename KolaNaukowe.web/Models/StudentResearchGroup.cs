@@ -16,10 +16,11 @@ namespace KolaNaukowe.web.Models
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Department { get; set; }
-        public IEnumerable<Student> Students { get; set; }
-
         // user ID from AspNetUser table.
         public string OwnerId { get; set; }
 
+        public virtual ICollection<Student> Students { get; set; }   
+
     }
+   
 }

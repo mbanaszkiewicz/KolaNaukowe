@@ -176,8 +176,8 @@ namespace KolaNaukowe.web.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    StudentResearchGroupId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    StudentResearchGroupId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,7 +187,7 @@ namespace KolaNaukowe.web.Migrations
                         column: x => x.StudentResearchGroupId,
                         principalTable: "StudentResearchGroups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

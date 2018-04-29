@@ -76,9 +76,10 @@ namespace KolaNaukowe.web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("StudentResearchGroupId");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("StudentResearchGroupId");
 
                     b.HasKey("Id");
 
@@ -218,7 +219,8 @@ namespace KolaNaukowe.web.Migrations
                 {
                     b.HasOne("KolaNaukowe.web.Models.StudentResearchGroup", "StudentResearchGroup")
                         .WithMany("Students")
-                        .HasForeignKey("StudentResearchGroupId");
+                        .HasForeignKey("StudentResearchGroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
