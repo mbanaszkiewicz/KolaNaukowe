@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using KolaNaukowe.web.Authorization;
+using KolaNaukowe.web.Services;
 
 namespace KolaNaukowe.web.Controllers
 {
     public class HomeController : Controller
     {
-        private IStudentResearchGroupService _service;
+        private IStudentResearchGroupService _studentResearchGroupService;
         private KolaNaukoweDbContext _context;
 
-        public HomeController(IStudentResearchGroupService service, KolaNaukoweDbContext context)
+        public HomeController(IStudentResearchGroupService studentResearchGroupService, KolaNaukoweDbContext context)
         {
             _context = context;
-            _service = service;
+            _studentResearchGroupService = studentResearchGroupService;
 
         }
         
         public IActionResult Index()
         {
-            var model = _service.GetAll();
+            var model = _studentResearchGroupService.GetAll();
             return View(model);
         }
 
@@ -38,7 +32,7 @@ namespace KolaNaukowe.web.Controllers
                 return NotFound();
             }
 
-            var student = _service.Get(id);
+            var student = _studentResearchGroupService.Get(id);
 
             if (student == null)
             {
@@ -59,7 +53,7 @@ namespace KolaNaukowe.web.Controllers
         {         
                 if (ModelState.IsValid)
                 {
-                _service.Add(studentGroup);
+                _studentResearchGroupService.Add(studentGroup);
                     return RedirectToAction(nameof(Index));
                 }
             return   View(studentGroup); 
@@ -70,7 +64,7 @@ namespace KolaNaukowe.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.Remove(id);
+                _studentResearchGroupService.Remove(id);
                 return RedirectToAction(nameof(Index));
             }
             return View(studentGroup);

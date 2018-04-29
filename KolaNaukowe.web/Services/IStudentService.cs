@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace KolaNaukowe.web.Services
 {
-    interface IStudentService
+    public interface IStudentService
     {
         IEnumerable<Student> GetAll();
         Student Get(int id);
-        Student Add(Student student);
-        void Update(int id);
+        Student Add(Student item);
+        void Update(Student item);
         void Remove(int id);
     }
 }

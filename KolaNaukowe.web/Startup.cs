@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IdentityModel.Tokens.Jwt;
+using KolaNaukowe.web.Repositories;
 
 namespace KolaNaukowe.web
 {
@@ -71,6 +72,10 @@ namespace KolaNaukowe.web
             services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
 
             services.AddScoped<IStudentResearchGroupService, StudentResearchGroupService>();
+            services.AddScoped<IGenericRepository<StudentResearchGroup>, GenericRepository<StudentResearchGroup>>();
+            services.AddScoped<IGenericRepository<Student>, GenericRepository<Student>>();
+            services.AddScoped<IStudentService, StudentService>();
+
             services.AddDbContext<KolaNaukoweDbContext>(o => o.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=KolaNaukowe;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
             services.AddTransient<IEmailSender, EmailSender>();

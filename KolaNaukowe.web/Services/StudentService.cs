@@ -1,50 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using KolaNaukowe.web.Data;
+﻿using System.Collections.Generic;
 using KolaNaukowe.web.Models;
+using KolaNaukowe.web.Repositories;
 
 namespace KolaNaukowe.web.Services
 {
     public class StudentService : IStudentService
     {
-        private KolaNaukoweDbContext _context;
+        private readonly IGenericRepository<Student> _genericRepository;
 
-        public StudentService(KolaNaukoweDbContext context)
+        public StudentService(IGenericRepository<Student> genericRepository)
         {
-            _context = context;
+            _genericRepository = genericRepository;
         }
 
         public Student Add(Student student)
         {
-            _context.Students.Add(student);
-            _context.SaveChanges();
-            return student;
+            return _genericRepository.Add(student);
         }
 
         public Student Get(int id)
         {
-            return _context.Students.Single(x => x.Id == id);
-
+            return _genericRepository.Get(id);
         }
 
         public IEnumerable<Student> GetAll()
         {
-            return _context.Students.OrderBy(x => x.Id);
+            return _genericRepository.GetAll();
         }
 
         public void Remove(int id)
         {
-            var student = Get(id);
-            _context.Students.Remove(student);
+            _genericRepository.Remove(id);
         }
 
-        public void Update(int id)
+        public void Update(Student item)
         {
-            var studentToUpdate = _context.StudentResearchGroups.SingleOrDefault(x => x.Id == id);
-            studentToUpdate.Name = "new name";
-            _context.SaveChanges();
+            _genericRepository.Update(item);
         }
     }
 }
