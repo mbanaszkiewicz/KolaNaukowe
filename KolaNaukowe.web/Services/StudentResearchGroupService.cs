@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KolaNaukowe.web.Dtos;
+using KolaNaukowe.web.Extensions;
 using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Repositories;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace KolaNaukowe.web.Services
         {
             var studentResearchGroups = _genericRepository.GetAll().OrderBy(c => c.Name);                   
             return _mapper.Map<IEnumerable<StudentResearchGroup>, IEnumerable<StudentResearchGroupDto>>(studentResearchGroups);                      
+        }
+
+        public IEnumerable<StudentResearchGroupDto> Filter(string searchString)
+        {
+            var studentResearchGroups = _genericRepository.GetAll().Where(s => s.Name.Contains(searchString, System.StringComparison.CurrentCultureIgnoreCase));
+            return _mapper.Map<IEnumerable<StudentResearchGroup>, IEnumerable<StudentResearchGroupDto>>(studentResearchGroups);
         }
 
         public void Remove(int id)

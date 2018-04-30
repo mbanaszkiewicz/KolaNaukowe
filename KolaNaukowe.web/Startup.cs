@@ -56,17 +56,17 @@ namespace KolaNaukowe.web
                   {
                       jwt.Authority = "http://localhost:5000";
                       jwt.RequireHttpsMetadata = false;
-                      jwt.Audience = "api1";
+                      jwt.Audience = "StudentResearchGroupAPI";
                   });
 
 
             services.AddAuthorization(options =>
                 {
                     options.AddPolicy("AdminOnly", policy =>
-                    policy.Requirements.Add(new RoleRequirement(new List<string> { "Administrator" })));
+                    policy.Requirements.Add(new RoleRequirement(new List<string> { Constants.AdministratorRole })));
 
                     options.AddPolicy("LeaderAndAdmin", policy =>
-                    policy.Requirements.Add(new RoleRequirement(new List<string> { "Administrator", "Leader" })));
+                    policy.Requirements.Add(new RoleRequirement(new List<string> { Constants.AdministratorRole, Constants.LeaderRole })));
                 });
 
             services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();

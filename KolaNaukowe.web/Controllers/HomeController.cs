@@ -4,6 +4,8 @@ using KolaNaukowe.web.Models;
 using KolaNaukowe.web.Data;
 using Microsoft.AspNetCore.Authorization;
 using KolaNaukowe.web.Services;
+using System.Linq;
+using KolaNaukowe.web.Extensions;
 
 namespace KolaNaukowe.web.Controllers
 {
@@ -18,10 +20,15 @@ namespace KolaNaukowe.web.Controllers
             _studentResearchGroupService = studentResearchGroupService;
         }
         
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
             var model = _studentResearchGroupService.GetAll();
-            return View(model);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = _studentResearchGroupService.Filter(searchString);
+            }
+            return View(model.ToList());
         }
 
         public IActionResult Details(int id)

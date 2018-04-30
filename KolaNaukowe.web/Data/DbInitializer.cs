@@ -17,13 +17,12 @@ namespace KolaNaukowe.web.Data
             using (var context = new KolaNaukoweDbContext(serviceProvider.GetRequiredService<DbContextOptions<KolaNaukoweDbContext>>()))
             {
                 context.Database.EnsureCreated();
-                //konto admina(wszystkie akcje dozwolone)
                 var adminID = await EnsureUser(serviceProvider, testUserPw, "admin@test.com");
                 await EnsureRole(serviceProvider, adminID, Constants.AdministratorRole);
-                //konto prezesa(edycja dozwolona)(obecnie jeden dla wszystkich kół)
+                
                 var leaderID = await EnsureUser(serviceProvider, testUserPw, "leader@test.com");
                 await EnsureRole(serviceProvider, leaderID, Constants.LeaderRole);
-                //konto uzytkownika(dostęp do opisu)
+                
                 var userID = await EnsureUser(serviceProvider, testUserPw, "user@test.com");
                 await EnsureRole(serviceProvider, userID, Constants.UserRole);
                 SeedDb(context, leaderID);

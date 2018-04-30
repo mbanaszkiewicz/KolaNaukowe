@@ -12,7 +12,7 @@ namespace KolaNaukowe.web.Authorization
        {
            new Client
            {
-               ClientId = "rg",
+               ClientId = "StudentResearchGroupsClient",
                ClientName = "StudentResearchGroupsClient",
                AllowedGrantTypes = GrantTypes.ClientCredentials,
                AllowAccessTokensViaBrowser = true,
@@ -37,7 +37,7 @@ namespace KolaNaukowe.web.Authorization
 
         public static IEnumerable<ApiResource> Apis = new List<ApiResource>
         {
-            new ApiResource("api", "my api")
+            new ApiResource("StudentResearchGroupAPI", "StudentResearchGroupAPI")
         };
     }
 }
