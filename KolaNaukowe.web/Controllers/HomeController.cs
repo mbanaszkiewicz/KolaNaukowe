@@ -65,9 +65,9 @@ namespace KolaNaukowe.web.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+            var studentResearchGroup = _studentResearchGroupService.Get(id);
             _studentResearchGroupService.Remove(id);
 
-            var studentResearchGroup = _studentResearchGroupService.Get(id);
             return View(studentResearchGroup);
         }
 
